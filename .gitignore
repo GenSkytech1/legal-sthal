@@ -1,0 +1,89 @@
+# ==============================
+# GLOBAL
+# ==============================
+.DS_Store
+Thumbs.db
+*.log
+*.pem
+*.key
+*.crt
+*.swp
+*.tmp
+
+# ==============================
+# ENV FILES (NEVER COMMIT)
+# ==============================
+.env
+.env.*
+!.env.example
+
+# ==============================
+# FRONTEND - Next.js (legal-sthal-crm)
+# ==============================
+
+legal-sthal-crm/node_modules/
+legal-sthal-crm/.next/
+legal-sthal-crm/out/
+legal-sthal-crm/build/
+legal-sthal-crm/.vercel/
+legal-sthal-crm/.turbo/
+
+# Logs
+legal-sthal-crm/npm-debug.log*
+legal-sthal-crm/yarn-debug.log*
+legal-sthal-crm/yarn-error.log*
+legal-sthal-crm/pnpm-debug.log*
+
+# TypeScript
+legal-sthal-crm/*.tsbuildinfo
+legal-sthal-crm/next-env.d.ts
+
+# ==============================
+# BACKEND - Laravel (legal-sthal-crm-backend)
+# ==============================
+
+# Composer
+legal-sthal-crm-backend/vendor/
+
+# Node (if used in backend)
+legal-sthal-crm-backend/node_modules/
+
+# Laravel Cache & Compiled Files
+legal-sthal-crm-backend/bootstrap/cache/*.php
+legal-sthal-crm-backend/bootstrap/cache/*.json
+
+# Storage (IGNORE everything except public uploads folder)
+legal-sthal-crm-backend/storage/app/*
+!legal-sthal-crm-backend/storage/app/public/
+
+legal-sthal-crm-backend/storage/framework/cache/*
+legal-sthal-crm-backend/storage/framework/sessions/*
+legal-sthal-crm-backend/storage/framework/views/*
+legal-sthal-crm-backend/storage/logs/*
+legal-sthal-crm-backend/storage/*.key
+
+# Public storage symlink
+legal-sthal-crm-backend/public/storage
+
+# Laravel IDE helper (if used)
+legal-sthal-crm-backend/_ide_helper.php
+
+# ==============================
+# DATABASE (Optional but recommended)
+# ==============================
+*.sqlite
+database/*.sqlite
+
+# ==============================
+# TESTING
+# ==============================
+coverage/
+.phpunit.result.cache
+
+# ==============================
+# IDE / EDITOR
+# ==============================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
