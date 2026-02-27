@@ -65,9 +65,9 @@
                   <div className="col-lg-5 mx-auto">
                     <div className="login-content user-login">
                       <div className="login-logo">
-                        <img src="assets/img/logo.png" alt="img" />
+                        <img src="assets/img/logo.png" alt="Legal Sthal" />
                         <Link href={route.dashboard} className="login-logo logo-white">
-                          <img src="assets/img/logo-white.png" alt="Img" />
+                          <img src="assets/img/logo.png" alt="Legal Sthal" />
                         </Link>
                       </div>
                       <form onSubmit={handleLogin}>

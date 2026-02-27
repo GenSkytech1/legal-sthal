@@ -33,13 +33,13 @@ const PosHeader = () => {
         {/* Logo */}
         <div className="header-left active">
           <Link href={all_routes.newdashboard} className="logo logo-normal">
-            <img src="assets/img/logo.png" alt="Img" />
+            <img src="assets/img/logo.png" alt="Legal Sthal" />
           </Link>
           <Link href={all_routes.newdashboard} className="logo logo-white">
-            <img src="assets/img/logo-white.png" alt="Img" />
+            <img src="assets/img/logo.png" alt="Legal Sthal" />
           </Link>
           <Link href={all_routes.newdashboard} className="logo-small">
-            <img src="assets/img/logo-small.png" alt="Img" />
+            <img src="assets/img/logo.png" alt="Legal Sthal" />
           </Link>
         </div>
         {/* /Logo */}
