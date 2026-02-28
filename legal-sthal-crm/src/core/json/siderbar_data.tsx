@@ -29,69 +29,23 @@ export const SidebarData = [
 
         submenuItems: [
           { label: "Dashboard", link: "/dashboard" },
-          { label: "Companies", link: "/companies" },
-          { label: "Subscriptions", link: "/subscription" },
-          { label: "Packages", link: "/packages" },
-          { label: "Domain", link: "/domain" },
-          { label: "Purchase Transaction", link: route.purchasetransaction },
+           
         ],
       },
       {
-        label: "Application",
+        label: "Leads",
         icon: "brand-apple-arcade",
         submenu: true,
         showSubRoute: false,
         submenuItems: [
-          { label: "Chat", link: "/chat", showSubRoute: false },
-          {
-            label: "Call",
-            submenu: true,
-            submenuItems: [
-              { label: "Video Call", link: "/video-call" },
-              { label: "Audio Call", link: "/audio-call" },
-              { label: "Call History", link: "/call-history" },
-            ],
-          },
-          { label: "Calendar", link: "/calendar", showSubRoute: false },
-          { label: "Contact", link: "/contacts", showSubRoute: false },
-          { label: "Email", link: "/email", showSubRoute: false },
-          { label: "To Do", link: "/todo", showSubRoute: false },
-          { label: "Notes", link: "/notes", showSubRoute: false },
-          { label: "File Manager", link: "/file-manager", showSubRoute: false },
-          { label: "Projects", link: "/projects", showSubRoute: false },
-          {
-            label: "Ecommerce",
-            submenu: true,
-            submenuItems: [
-              { label: "Products", link: "/products" },
-              { label: "Orders", link: "/orders" },
-              { label: "Customers", link: "/customers" },
-              { label: "Cart", link: "/cart" },
-              { label: "Checkout", link: "/checkout" },
-              { label: "Wishlist", link: "/wishlist" },
-              { label: "Reviews", link: "/reviews" },
-            ],
-          },
-          { label: "Social Feed", link: "/social-feed", showSubRoute: false },
-          { label: "Search List", link: "/search-list", showSubRoute: false },
+           
+          { label: "Online", link: `${route.leadsDashboard}?tab=online`, showSubRoute: false },
+          { label: "System Generated", link: `${route.leadsDashboard}?tab=system`, showSubRoute: false },
+          { label: "Follow Up", link: `${route.leadsDashboard}?tab=follow`, showSubRoute: false },
+            
         ],
       },
-      {
-        label: "Layouts",
-        icon: "layout-sidebar-right-collapse",
-        submenu: true,
-        showSubRoute: false,
-        submenuItems: [
-          { label: "Horizontal", link: route.Horizontal, showSubRoute: false },
-          { label: "Detached", link: route.Detached, showSubRoute: false },
-          // { label: "Modern", link: route.Modern, showSubRoute: false },
-          { label: "Two Column", link: route.TwoColumn, showSubRoute: false },
-          { label: "Hovered", link: route.Hovered, showSubRoute: false },
-          { label: "Boxed", link: route.Boxed, showSubRoute: false },
-          { label: "RTL", link: route.RTL, showSubRoute: false },
-          { label: "Dark", link: route.Dark, showSubRoute: false },
-        ],
-      },
+       
     ],
   },
   {
