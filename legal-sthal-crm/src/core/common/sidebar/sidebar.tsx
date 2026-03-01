@@ -56,7 +56,7 @@ export default function Sidebar() {
     // Update the DOM based on `dataLayout` and `expandMenus`
     document.body.classList.toggle("expand-menu", expandMenus || dataLayout === "layout-hovered");
   }, [expandMenus, dataLayout]);
-  
+    
 
   return (
     <>
