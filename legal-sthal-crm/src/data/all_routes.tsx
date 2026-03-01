@@ -205,6 +205,9 @@ export const all_routes = {
 
   //New Page
   onlineorder: "/online-orders",
+  leadsOnline: "/leads/online",
+  
+  leadsDashboard: "/dashboard/Leads",
   customer: "/customers",
   pos: "/pos",
   posorder: "/pos-orders",

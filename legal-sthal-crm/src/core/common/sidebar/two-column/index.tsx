@@ -157,13 +157,13 @@ const TwoColumnSidebar = () => {
                             {/* Logo */}
                             <div className="sidebar-logo">
                                 <Link href={route.newdashboard} className="logo logo-normal">
-                                    <img src="assets/img/logo.svg" alt="Img" />
+                                    <img src="assets/img/logo.png" alt="Legal Sthal" />
                                 </Link>
                                 <Link href={route.newdashboard} className="logo logo-white">
-                                    <img src="assets/img/logo-white.svg" alt="Img" />
+                                    <img src="assets/img/logo.png" alt="Legal Sthal" />
                                 </Link>
                                 <Link href={route.newdashboard} className="logo-small">
-                                    <img src="assets/img/logo-small.png" alt="Img" />
+                                    <img src="assets/img/logo.png" alt="Legal Sthal" />
                                 </Link>
                             </div>
                             {/* /Logo */}

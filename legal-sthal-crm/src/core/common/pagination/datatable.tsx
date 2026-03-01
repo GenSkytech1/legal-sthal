@@ -54,7 +54,9 @@ const Datatable = ({ props, columns, dataSource }:any) => {
       rowSelection={rowSelection}
       columns={columns}
       dataSource={filteredDataSource}
-      rowKey={(record) => record.id}
+      rowKey={(record: any) => {
+        return record.id ?? record.LeadID ?? record.Email ?? record.Mobile ?? JSON.stringify(record);
+      }}
       pagination={{
           locale: { items_per_page: "" },
           nextIcon: <span><i className="fa fa-angle-right" /></span>,

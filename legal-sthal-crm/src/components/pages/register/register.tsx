@@ -30,10 +30,10 @@ export default function RegisterComponent () {
               <form >
                 <div className="login-userset">
                   <div className="login-logo logo-normal">
-                    <img src="assets/img/logo.png" alt="img" />
+                    <img src="assets/img/logo.png" alt="Legal Sthal" />
                   </div>
                   <Link href={route.dashboard} className="login-logo logo-white">
-                    <img src="assets/img/logo-white.png" alt="Img" />
+                    <img src="assets/img/logo.png" alt="Legal Sthal" />
                   </Link>
                   <div className="login-userheading">
                     <h3>Register</h3>
