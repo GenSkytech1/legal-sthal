@@ -10,18 +10,6 @@ export const SidebarData = [
     submenuHdr: "Main",
     submenuItems: [
       {
-        label: "Dashboard",
-        icon: "layout-grid",
-        submenu: true,
-        showSubRoute: false,
-
-        submenuItems: [
-          { label: "Admin Dashboard", link: "/new-dashboard" },
-          { label: "Admin Dashboard 2", link: "/admin-dashboard" },
-          { label: "Sales Dashboard", link: "/sales-dashboard" },
-        ],
-      },
-      {
         label: "Super Admin",
         icon: "user-edit",
         submenu: true,
