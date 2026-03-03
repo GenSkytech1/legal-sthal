@@ -134,7 +134,7 @@ export const all_routes = {
   notification: "/notification",
   connectedapps: "/connected-apps",
   systemsettings: "/system-settings",
-  companysettings: "/company-settings",
+  companysettings: "/company-settings", landingpagesettings: "/landing-page-settings", custompages: "/custom-pages",
   localizationsettings: "/localization-settings",
   prefixes: "/prefixes",
   preference: "/preference",

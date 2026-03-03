@@ -10,15 +10,12 @@ export const SidebarData = [
     submenuHdr: "Main",
     submenuItems: [
       {
-        label: "Super Admin",
+        label: "Dashboard",
         icon: "user-edit",
-        submenu: true,
+        link: "/dashboard",
+        submenu: false,
         showSubRoute: false,
-
-        submenuItems: [
-          { label: "Dashboard", link: "/dashboard" },
-           
-        ],
+ 
       },
       {
         label: "Leads",
