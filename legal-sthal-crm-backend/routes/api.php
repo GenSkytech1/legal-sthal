@@ -5,6 +5,9 @@ use App\Http\Controllers\Api\CompanySettingController;
 use App\Http\Controllers\WebsiteContentController;
 use App\Http\Controllers\CustomPageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\Service\ServiceController;
+use App\Http\Controllers\API\Service\PlanController;
+
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -29,3 +32,26 @@ Route::middleware(['jwt.cookie', 'auth:api'])->group(function () {
 
 Route::get('/webhooks/meta', [MetaWebhookController::class, 'verify']);
 Route::post('/webhooks/meta', [MetaWebhookController::class, 'handle']);
+
+
+// Service Routes
+Route::middleware(['jwt.cookie', 'auth:api'])->prefix('services')->group(function () {
+
+    Route::get('/', [ServiceController::class,'index']);
+    Route::post('/store', [ServiceController::class,'store']);
+    Route::post('/update/{id}', [ServiceController::class,'update']);
+    Route::delete('/delete/{id}', [ServiceController::class,'destroy']);
+
+});
+
+// Plan Routes
+Route::middleware(['jwt.cookie', 'auth:api'])->prefix('plans')->group(function(){
+
+    Route::get('/',[PlanController::class,'index']);
+    Route::get('/{id}',[PlanController::class,'show']);
+    Route::post('/store',[PlanController::class,'store']);
+    Route::post('/update/{id}',[PlanController::class,'update']);
+    Route::delete('/delete/{id}',[PlanController::class,'destroy']);
+    Route::delete('/delete-multiple',[PlanController::class,'deleteMultiple']);
+
+});
