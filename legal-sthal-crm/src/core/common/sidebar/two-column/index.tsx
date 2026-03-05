@@ -29,6 +29,8 @@ const TwoColumnSidebar = () => {
                                     title="Dashboard"
                                     data-bs-toggle="tab"
                                     data-bs-target="#dashboard"
+                                    role="tab"
+                                    aria-selected="true"
                                 >
                                     <i className="ti ti-smart-home" />
                                 </Link>
@@ -38,6 +40,9 @@ const TwoColumnSidebar = () => {
                                     title="Super Admin"
                                     data-bs-toggle="tab"
                                     data-bs-target="#super-admin"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-user-star" />
                                 </Link>
@@ -47,6 +52,9 @@ const TwoColumnSidebar = () => {
                                     title="Apps"
                                     data-bs-toggle="tab"
                                     data-bs-target="#application"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-layout-grid-add" />
                                 </Link>
@@ -56,6 +64,9 @@ const TwoColumnSidebar = () => {
                                     title="Layout"
                                     data-bs-toggle="tab"
                                     data-bs-target="#layout"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-layout-board-split" />
                                 </Link>
@@ -65,6 +76,9 @@ const TwoColumnSidebar = () => {
                                     title="Inventory"
                                     data-bs-toggle="tab"
                                     data-bs-target="#inventory"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-table-plus" />
                                 </Link>
@@ -74,6 +88,9 @@ const TwoColumnSidebar = () => {
                                     title="Stock"
                                     data-bs-toggle="tab"
                                     data-bs-target="#stock"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-stack-3" />
                                 </Link>
@@ -83,6 +100,9 @@ const TwoColumnSidebar = () => {
                                     title="Sales"
                                     data-bs-toggle="tab"
                                     data-bs-target="#sales"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-device-laptop" />
                                 </Link>
@@ -92,6 +112,9 @@ const TwoColumnSidebar = () => {
                                     title="Finance"
                                     data-bs-toggle="tab"
                                     data-bs-target="#finance"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-shopping-cart-dollar" />
                                 </Link>
@@ -101,6 +124,9 @@ const TwoColumnSidebar = () => {
                                     title="Hrm"
                                     data-bs-toggle="tab"
                                     data-bs-target="#hrm"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-cash" />
                                 </Link>
@@ -110,6 +136,9 @@ const TwoColumnSidebar = () => {
                                     title="Reports"
                                     data-bs-toggle="tab"
                                     data-bs-target="#reports"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-license" />
                                 </Link>
@@ -119,6 +148,9 @@ const TwoColumnSidebar = () => {
                                     title="Pages"
                                     data-bs-toggle="tab"
                                     data-bs-target="#pages"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-page-break" />
                                 </Link>
@@ -128,6 +160,9 @@ const TwoColumnSidebar = () => {
                                     title="Settings"
                                     data-bs-toggle="tab"
                                     data-bs-target="#settings"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-lock-check" />
                                 </Link>
@@ -137,6 +172,9 @@ const TwoColumnSidebar = () => {
                                     title="UI Elements"
                                     data-bs-toggle="tab"
                                     data-bs-target="#ui-elements"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-ux-circle" />
                                 </Link>
@@ -146,6 +184,9 @@ const TwoColumnSidebar = () => {
                                     title="Extras"
                                     data-bs-toggle="tab"
                                     data-bs-target="#extras"
+                                    role="tab"
+                                    aria-selected="false"
+                                    tabIndex={-1}
                                 >
                                     <i className="ti ti-vector-triangle" />
                                 </Link>
@@ -182,7 +223,7 @@ const TwoColumnSidebar = () => {
                                 <p className="fs-10 mb-0">System Admin</p>
                             </div>
                             <div className="tab-content" id="v-pills-tabContent">
-                                <div className="tab-pane fade show active" id="dashboard">
+                                <div className="tab-pane fade show active" id="dashboard" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>MAIN</span>
@@ -200,7 +241,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="super-admin">
+                                <div className="tab-pane fade" id="super-admin" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>SUPER ADMIN</span>
@@ -225,7 +266,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="application">
+                                <div className="tab-pane fade" id="application" role="tabpanel">
                                     <ul>
                                         <li>
                                             <Link href={all_routes.chat}>Chat</Link>
@@ -305,7 +346,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="layout">
+                                <div className="tab-pane fade" id="layout" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>LAYOUT</span>
@@ -336,7 +377,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="inventory">
+                                <div className="tab-pane fade" id="inventory" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>Inventory</span>
@@ -403,7 +444,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="stock">
+                                <div className="tab-pane fade" id="stock" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>Stock</span>
@@ -425,7 +466,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="sales">
+                                <div className="tab-pane fade" id="sales" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>Sales</span>
@@ -484,7 +525,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="finance">
+                                <div className="tab-pane fade" id="finance" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>FINANCE &amp; ACCOUNTS</span>
@@ -613,7 +654,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="hrm">
+                                <div className="tab-pane fade" id="hrm" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>Hrm</span>
@@ -690,7 +731,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="reports">
+                                <div className="tab-pane fade" id="reports" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>Reports</span>
@@ -812,7 +853,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="pages">
+                                <div className="tab-pane fade" id="pages" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>Pages</span>
@@ -1046,7 +1087,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="settings">
+                                <div className="tab-pane fade" id="settings" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>Settings</span>
@@ -1221,7 +1262,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="ui-elements">
+                                <div className="tab-pane fade" id="ui-elements" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>Ui Interface</span>
@@ -1528,7 +1569,7 @@ const TwoColumnSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="tab-pane fade" id="extras">
+                                <div className="tab-pane fade" id="extras" role="tabpanel">
                                     <ul>
                                         <li className="menu-title">
                                             <span>Help</span>

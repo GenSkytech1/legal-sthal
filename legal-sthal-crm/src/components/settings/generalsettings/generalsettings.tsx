@@ -7,7 +7,7 @@ import RefreshIcon from '@/core/common/tooltip-content/refresh';
 import React from 'react'
 import Select from "react-select";
 import SettingsSideBar from '../settingssidebar';
-import { City, Country, State } from '@/core/common/selectOption/selectOption';
+import { Country, State, City } from 'country-state-city';
 import Link from 'next/link';
 import CommonFooter from '@/core/common/footer/commonFooter';
 

@@ -59,9 +59,6 @@ const SettingsSideBar = (props: any) => {
       <div className="sidebar-inner slimscroll">
         <PerfectScrollbar
           style={{ marginRight: -5, height: 800 }}
-          autoHide
-          autoHeight
-          autoHeightMin={400} // Set a minimum height for the scrollbar
           {...props}
         // width={100}
         // autoHideTimeout={1000}
@@ -140,7 +137,7 @@ const SettingsSideBar = (props: any) => {
                     </ul>
                   </li>
                   <li className="submenu">
-                    <Link href="#" onClick={toggleWebsiteSettings} className={pathname === route.systemsettings || pathname === route.companysettings || pathname === route.localizationsettings || pathname == route.prefixes || pathname == route.preference || pathname == route.appearance || pathname == route.socialauthendication || pathname == route.languagesettings ? 'active subdrop' : ''}>
+                    <Link href="#" onClick={toggleWebsiteSettings} className={pathname === route.landingpagesettings || pathname === route.systemsettings || pathname === route.companysettings || pathname === route.localizationsettings || pathname == route.prefixes || pathname == route.preference || pathname == route.appearance || pathname == route.socialauthendication || pathname == route.languagesettings ? 'active subdrop' : ''}>
                       <i className="ti ti-world fs-18"></i>
                       <span className="fs-14 fw-medium ms-2">Website Settings</span>
                       <span className="menu-arrow" />
@@ -160,6 +157,30 @@ const SettingsSideBar = (props: any) => {
                           }
                         >
                           System Settings
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href={route.landingpagesettings}
+                          className={
+                            pathname === route.landingpagesettings
+                              ? "active"
+                              : ""
+                          }
+                        >
+                          Landing Page CMS
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href={route.custompages}
+                          className={
+                            pathname === route.custompages || pathname?.startsWith('/custom-pages')
+                              ? "active"
+                              : ""
+                          }
+                        >
+                          Custom Pages
                         </Link>
                       </li>
                       <li>

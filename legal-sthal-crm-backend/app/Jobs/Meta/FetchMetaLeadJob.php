@@ -1,23 +1,43 @@
-<?php
+﻿<?php
 
-namespace App\Services\Meta;
+namespace App\Jobs\Meta;
 
 use App\Models\Lead;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 
-class FetchMetaLeadJob
+class FetchMetaLeadJob implements ShouldQueue
 {
-    public function fetchAndStore(string $leadId): void
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public string $leadId;
+
+    /**
+     * Create a new job instance.
+     */
+    public function __construct(string $leadId)
+    {
+        $this->leadId = $leadId;
+    }
+
+    /**
+     * Execute the job.
+     */
+    public function handle(): void
     {
         $response = Http::get(
-            "https://graph.facebook.com/v19.0/{$leadId}",
+            "https://graph.facebook.com/v19.0/{$this->leadId}",
             [
                 'access_token' => config('services.meta.page_token'),
-                'fields' => 'created_time,ad_id,ad_name,campaign_id,campaign_name,form_id,field_data',
+                'fields'       => 'created_time,ad_id,ad_name,campaign_id,campaign_name,form_id,field_data',
             ]
         );
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             return;
         }
 
@@ -28,8 +48,8 @@ class FetchMetaLeadJob
 
         Lead::updateOrCreate(
             [
-                'source' => 'meta_ads',
-                'platform_lead_id' => $leadId,
+                'source'           => 'meta_ads',
+                'platform_lead_id' => $this->leadId,
             ],
             [
                 'campaign_id'   => $data['campaign_id'] ?? null,
@@ -46,3 +66,4 @@ class FetchMetaLeadJob
         );
     }
 }
+
