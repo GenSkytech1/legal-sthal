@@ -14,6 +14,8 @@ return [
     |
     */
 
+
+
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],
@@ -33,6 +35,20 @@ return [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
+    ], 
+
+
+    'meta' => [
+        'verify_token' => env('META_VERIFY_TOKEN'),
+        'page_token' => env('META_PAGE_TOKEN')  
+    ], 
+
+    'google_ads' => [
+        'developer_token' => env('GOOGLE_ADS_DEVELOPER_TOKEN'),
+        'client_id'       => env('GOOGLE_ADS_CLIENT_ID'),
+        'client_secret'   => env('GOOGLE_ADS_CLIENT_SECRET'),
+        'refresh_token'   => env('GOOGLE_ADS_REFRESH_TOKEN'),
+        'customer_id'     => env('GOOGLE_ADS_CUSTOMER_ID'),
     ],
 
 ];

@@ -382,7 +382,7 @@ export default function Header() {
                   Settings
                 </Link>
                 <hr className="my-2" />
-                <Link className="dropdown-item logout pb-0" href={route.signin}>
+                <Link className="dropdown-item logout pb-0" href={route.signin} onClick={() => { typeof window !== 'undefined' && localStorage.removeItem('auth_token') }}>
                   <i className="ti ti-logout me-2" />
                   Logout
                 </Link>
@@ -407,7 +407,7 @@ export default function Header() {
               <Link className="dropdown-item" href="generalsettings">
                 Settings
               </Link>
-              <Link className="dropdown-item" href="signin">
+              <Link className="dropdown-item" href="signin" onClick={() => { typeof window !== 'undefined' && localStorage.removeItem('auth_token') }}>
                 Logout
               </Link>
             </div>
