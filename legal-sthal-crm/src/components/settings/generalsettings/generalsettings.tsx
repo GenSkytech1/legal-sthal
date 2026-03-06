@@ -135,7 +135,7 @@ export default function GeneralSettingsComponent  ()  {
                                                         </label>
                                                         <Select
                                                             classNamePrefix="react-select"
-                                                            options={Country}
+                                                            options={Country.getAllCountries().map((country) => ({ value: country.isoCode, label: country.name }))}
                                                             placeholder="Choose"
                                                         />
                                                     </div>
@@ -147,7 +147,7 @@ export default function GeneralSettingsComponent  ()  {
                                                         </label>
                                                         <Select
                                                             classNamePrefix="react-select"
-                                                            options={State}
+                                                            options={State.getAllStates().map((state) => ({ value: state.isoCode, label: state.name }))}
                                                             placeholder="Choose"
                                                         />
                                                     </div>
@@ -159,7 +159,7 @@ export default function GeneralSettingsComponent  ()  {
                                                         </label>
                                                         <Select
                                                             classNamePrefix="react-select"
-                                                            options={City}
+                                                            options={City.getAllCities().map((city) => ({ value: city.name, label: city.name }))}
                                                             placeholder="Choose"
                                                         />
                                                     </div>

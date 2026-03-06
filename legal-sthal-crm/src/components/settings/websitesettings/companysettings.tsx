@@ -19,7 +19,7 @@ export default function CompanySettingsComponent () {
         setMounted(true);
     }, []);
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<any>({
         company_name: '',
         company_email: '',
         phone_number: '',
@@ -32,14 +32,14 @@ export default function CompanySettingsComponent () {
         city: null
     });
 
-    const [files, setFiles] = useState({
+    const [files, setFiles] = useState<any>({
         company_icon: null,
         favicon: null,
         company_logo: null,
         company_dark_logo: null
     });
 
-    const [preview, setPreview] = useState({
+    const [preview, setPreview] = useState<any>({
         company_icon: null,
         favicon: null,
         company_logo: null,
@@ -80,11 +80,11 @@ export default function CompanySettingsComponent () {
         fetchSettings();
     }, []);
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: any) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSelectChange = (name, selectedOption) => {
+    const handleSelectChange = (name: string, selectedOption: any) => {
         if (name === 'country') {
             setFormData({ ...formData, country: selectedOption, state: null, city: null });
         } else if (name === 'state') {
@@ -94,7 +94,7 @@ export default function CompanySettingsComponent () {
         }
     };
 
-    const handleFileChange = (e, name) => {
+    const handleFileChange = (e: any, name: string) => {
         const file = e.target.files[0];
         if (file) {
             setFiles({ ...files, [name]: file });
@@ -102,7 +102,7 @@ export default function CompanySettingsComponent () {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
             const data = new FormData();
