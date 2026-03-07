@@ -27,15 +27,21 @@ export default function LandingPageSettingsComponent() {
     const [trustedPartners, setTrustedPartners] = useState<any[]>([]);
     const [testimonials, setTestimonials] = useState<any[]>([]);
 
-    const [files, setFiles] = useState<{header_logo: File | null; hero_image: File | null}>({
+    const [files, setFiles] = useState<{header_logo: File | null; hero_image: File | null; why_choose_image: File | null}>({
         header_logo: null,
-        hero_image: null
+        hero_image: null,
+        why_choose_image: null
     });
 
-    const [preview, setPreview] = useState<{header_logo: string | null; hero_image: string | null}>({
+    const [preview, setPreview] = useState<{header_logo: string | null; hero_image: string | null; why_choose_image: string | null}>({
         header_logo: null,
-        hero_image: null
+        hero_image: null,
+        why_choose_image: null
     });
+
+    // Store testimonial files separately by index
+    const [testimonialFiles, setTestimonialFiles] = useState<{ [key: number]: File }>({});
+    const [testimonialPreviews, setTestimonialPreviews] = useState<{ [key: number]: string }>({});
 
     useEffect(() => {
         const fetchSettings = async () => {
@@ -43,6 +49,8 @@ export default function LandingPageSettingsComponent() {
                 const response = await api.get('/website-content');
                 if (response.data?.data) {
                     const d = response.data.data;
+                    const BASE_URL = (process.env.NEXT_PUBLIC_BACKEND_URL || '').replace('/api', '');
+
                     setFormData({
                         hero_title: d.hero_title || '',
                         hero_subtitle: d.hero_subtitle || '',
@@ -59,10 +67,10 @@ export default function LandingPageSettingsComponent() {
                     setTrustedPartners(d.trusted_partners || []);
                     setTestimonials(d.testimonials || []);
 
-                    const BASE_URL = (process.env.NEXT_PUBLIC_BACKEND_URL || '').replace('/api', '');
                     setPreview({
                         header_logo: d.header_logo ? BASE_URL + d.header_logo : null,
-                        hero_image: d.hero_image ? BASE_URL + d.hero_image : null
+                        hero_image: d.hero_image ? BASE_URL + d.hero_image : null,
+                        why_choose_image: d.why_choose_image ? BASE_URL + d.why_choose_image : null
                     });
                 }
             } catch (error) {
@@ -81,6 +89,14 @@ export default function LandingPageSettingsComponent() {
         if (file) {
             setFiles({ ...files, [name]: file });
             setPreview({ ...preview, [name]: URL.createObjectURL(file) } as any);
+        }
+    };
+
+    const handleTestimonialFileChange = (e: any, index: number) => {
+        const file = e.target.files[0];
+        if (file) {
+            setTestimonialFiles(prev => ({ ...prev, [index]: file }));
+            setTestimonialPreviews(prev => ({ ...prev, [index]: URL.createObjectURL(file) }));
         }
     };
 
@@ -142,7 +158,26 @@ export default function LandingPageSettingsComponent() {
         newTestimonials[index][field] = value;
         setTestimonials(newTestimonials);
     };
-    const removeTestimonial = (index: number) => setTestimonials(testimonials.filter((_, i) => i !== index));
+    const removeTestimonial = (index: number) => {
+        setTestimonials(testimonials.filter((_, i) => i !== index));
+        
+        // Cleanup files state to keep indices in sync
+        const newFiles: any = {};
+        Object.keys(testimonialFiles).forEach((key: any) => {
+            const k = parseInt(key);
+            if (k < index) newFiles[k] = testimonialFiles[k];
+            else if (k > index) newFiles[k - 1] = testimonialFiles[k];
+        });
+        setTestimonialFiles(newFiles);
+
+        const newPreviews: any = {};
+        Object.keys(testimonialPreviews).forEach((key: any) => {
+            const k = parseInt(key);
+            if (k < index) newPreviews[k] = testimonialPreviews[k];
+            else if (k > index) newPreviews[k - 1] = testimonialPreviews[k];
+        });
+        setTestimonialPreviews(newPreviews);
+    };
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -156,6 +191,11 @@ export default function LandingPageSettingsComponent() {
             
             if (files.header_logo) data.append('header_logo', files.header_logo);
             if (files.hero_image) data.append('hero_image', files.hero_image);
+            if (files.why_choose_image) data.append('why_choose_image', files.why_choose_image);
+
+            Object.keys(testimonialFiles).forEach((index: any) => {
+                data.append(`testimonial_image_${index}`, testimonialFiles[index]);
+            });
             
             data.append('header_nav', JSON.stringify(headerNav));
             data.append('our_services', JSON.stringify(services));
@@ -294,6 +334,12 @@ export default function LandingPageSettingsComponent() {
                                                     <h6 className="fs-16 fw-bold mb-0">Why Choose Legal Sthal?</h6>
                                                     <button type="button" className="btn btn-sm btn-primary" onClick={addWhyChoose}>+ Add Point</button>
                                                 </div>
+                                                <div className="mb-3">
+                                                    <label className="form-label">Why Choose Section Image</label>
+                                                    <input type="file" className="form-control" accept="image/*" onChange={(e) => handleFileChange(e, "why_choose_image")} />
+                                                    {preview.why_choose_image && <img src={preview.why_choose_image} alt="Preview" className="mt-2 rounded" style={{maxHeight:'80px'}} />}
+                                                </div>
+
                                                 {whyChoose.map((item: any, index: number) => (
                                                     <div key={index} className="d-flex mb-2 align-items-center">
                                                         <span className="me-2 fw-bold">{index + 1}.</span>
@@ -329,8 +375,29 @@ export default function LandingPageSettingsComponent() {
                                                     <h6 className="fs-16 fw-bold mb-0">Client Testimonials</h6>
                                                     <button type="button" className="btn btn-sm btn-primary" onClick={addTestimonial}>+ Add Testimonial</button>
                                                 </div>
-                                                {testimonials.map((testi: any, index: number) => (
+                                                {testimonials.map((testi: any, index: number) => {
+                                                     const BASE_URL = (process.env.NEXT_PUBLIC_BACKEND_URL || '').replace('/api', '');
+                                                     const displayImage = testimonialPreviews[index] || (testi.image ? BASE_URL + testi.image : null);
+                                                     
+                                                     return (
                                                     <div key={index} className="row mb-3 p-3 border rounded bg-light">
+                                                        <div className="col-12 mb-2">
+                                                            <div className="d-flex align-items-center">
+                                                                <div className="me-3">
+                                                                    {displayImage ? (
+                                                                        <img src={displayImage} alt="Profile" className="rounded-circle" style={{width: '60px', height: '60px', objectFit: 'cover'}} />
+                                                                    ) : (
+                                                                        <div className="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white" style={{width: '60px', height: '60px'}}>
+                                                                            <i className="ti ti-user fs-4"></i>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                                <div className="flex-grow-1">
+                                                                    <label className="form-label small mb-1">Profile Picture</label>
+                                                                    <input type="file" className="form-control form-control-sm" accept="image/*" onChange={(e) => handleTestimonialFileChange(e, index)} />
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div className="col-md-6 mb-2">
                                                             <input type="text" className="form-control fw-bold" placeholder="Client Name (e.g. Vikram Patel)" value={testi.author} onChange={(e) => updateTestimonial(index, 'author', e.target.value)} />
                                                         </div>
@@ -344,7 +411,7 @@ export default function LandingPageSettingsComponent() {
                                                             <button type="button" className="btn btn-danger btn-sm" onClick={() => removeTestimonial(index)}>Remove</button>
                                                         </div>
                                                     </div>
-                                                ))}
+                                                )})}
                                             </div>
 
                                             {/* Footer */}
