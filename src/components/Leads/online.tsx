@@ -1,130 +1,9 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 
-import React from "react";
-// mock data for online leads (10 entries)
-const mockLeads = [
-  {
-    LeadID: "L-1001",
-    Name: "John Doe",
-    Mobile: "+1 555-0123",
-    Email: "john.doe@example.com",
-    Source: "Website",
-    CampaignName: "Spring Promo",
-    DateTime: "2026-01-31T10:15:00Z",
-    Status: "New",
-    AssignedTo: "Alice",
-    Remarks: "Requested callback",
-  },
-  {
-    LeadID: "L-1002",
-    Name: "Maria Gomez",
-    Mobile: "+44 7700 900123",
-    Email: "maria.gomez@example.co.uk",
-    Source: "Facebook",
-    CampaignName: "Holiday Campaign",
-    DateTime: "2026-02-10T14:30:00Z",
-    Status: "Contacted",
-    AssignedTo: "Bob",
-    Remarks: "Interested in pricing",
-  },
-  {
-    LeadID: "L-1003",
-    Name: "Rahul Singh",
-    Mobile: "+91 98765 43210",
-    Email: "rahul.singh@example.in",
-    Source: "Google Ads",
-    CampaignName: "Search Ads",
-    DateTime: "2026-02-20T09:00:00Z",
-    Status: "Qualified",
-    AssignedTo: "Clara",
-    Remarks: "Follow up next week",
-  },
-  {
-    LeadID: "L-1004",
-    Name: "Sofia Rossi",
-    Mobile: "+39 340 1234567",
-    Email: "sofia.rossi@example.it",
-    Source: "Email",
-    CampaignName: "Newsletter",
-    DateTime: "2026-02-25T16:45:00Z",
-    Status: "New",
-    AssignedTo: "Alice",
-    Remarks: "Requested demo",
-  },
-  {
-    LeadID: "L-1005",
-    Name: "Liam Brown",
-    Mobile: "+61 412 345 678",
-    Email: "liam.brown@example.au",
-    Source: "LinkedIn",
-    CampaignName: "B2B Outreach",
-    DateTime: "2026-02-28T11:20:00Z",
-    Status: "Contacted",
-    AssignedTo: "Bob",
-    Remarks: "Send proposal",
-  },
-  {
-    LeadID: "L-1006",
-    Name: "Chen Wei",
-    Mobile: "+86 139 0000 0000",
-    Email: "chen.wei@example.cn",
-    Source: "Referral",
-    CampaignName: "Partner Referral",
-    DateTime: "2026-02-15T08:00:00Z",
-    Status: "Qualified",
-    AssignedTo: "Clara",
-    Remarks: "High priority",
-  },
-  {
-    LeadID: "L-1007",
-    Name: "Fatima Al Hadi",
-    Mobile: "+971 50 123 4567",
-    Email: "fatima.hadi@example.ae",
-    Source: "Instagram",
-    CampaignName: "Influencer Campaign",
-    DateTime: "2026-01-20T13:10:00Z",
-    Status: "New",
-    AssignedTo: "Alice",
-    Remarks: "Prefers evening calls",
-  },
-  {
-    LeadID: "L-1008",
-    Name: "Carlos Mendez",
-    Mobile: "+52 1 55 1234 5678",
-    Email: "carlos.mendez@example.mx",
-    Source: "Website",
-    CampaignName: "SEO Campaign",
-    DateTime: "2026-02-01T09:45:00Z",
-    Status: "Contacted",
-    AssignedTo: "Diana",
-    Remarks: "Requested case studies",
-  },
-  {
-    LeadID: "L-1009",
-    Name: "Anna Kuznetsova",
-    Mobile: "+7 916 123 4567",
-    Email: "anna.k@example.ru",
-    Source: "Yandex Ads",
-    CampaignName: "Local Ads",
-    DateTime: "2026-02-05T12:00:00Z",
-    Status: "Qualified",
-    AssignedTo: "Clara",
-    Remarks: "Budget confirmed",
-  },
-  {
-    LeadID: "L-1010",
-    Name: "David Kim",
-    Mobile: "+82 10 1234 5678",
-    Email: "david.kim@example.kr",
-    Source: "Email",
-    CampaignName: "Re-engagement",
-    DateTime: "2026-02-26T15:30:00Z",
-    Status: "New",
-    AssignedTo: "Bob",
-    Remarks: "Needs demo",
-  },
-];
+import React, { useState, useEffect } from "react";
+import api from "@/lib/axios";
+// mock data replaced by API fetch
 import  Table  from "@/core/common/pagination/datatable";
 import Link from "next/link";
 import TooltipIcons from "@/core/common/tooltip-content/tooltipIcons";
@@ -137,7 +16,38 @@ const Select = dynamic(() => import("react-select"), { ssr: false });
 
 
 export default function IncomeListComponent () {
-  const dataSource = mockLeads;
+  const [leads, setLeads] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLeads = async () => {
+      try {
+        const response = await api.get('/leads');
+        if (response.data?.data) {
+           const mappedData = response.data.data.map((lead: any) => ({
+             LeadID: `L-${lead.id}`,
+             Name: lead.name,
+             Mobile: lead.phone,
+             Email: lead.email || 'N/A',
+             Source: lead.source || 'Website',
+             CampaignName: lead.campaign_name || '-',
+             DateTime: lead.created_at,
+             Status: lead.status || 'New',
+             AssignedTo: lead.assigned_to || 'Unassigned',
+             Remarks: lead.message || '-' // Mapping message to remarks for now
+           }));
+           setLeads(mappedData);
+        }
+      } catch (error) {
+        console.error("Failed to fetch leads", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLeads();
+  }, []);
+
+  const dataSource = leads;
 
   const columns = [
     {
