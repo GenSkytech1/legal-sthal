@@ -6,26 +6,31 @@ import { useRouter } from "next/navigation";
 import api from "@/lib/axios";
 import { all_routes } from "@/data/all_routes";
 
-const CustomPageForm = () => {
+interface CustomPageFormProps {
+  initialData?: any;
+  isEdit?: boolean;
+}
+
+const CustomPageForm = ({ initialData, isEdit }: CustomPageFormProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   
   const [formData, setFormData] = useState({
-    title: "",
-    slug: "",
-    status: 1,
-    hero_title: "",
-    hero_price: "",
-    hero_subtitle: "",
-    form_title: "",
-    also_get: [""],
-    how_it_works: [""],
-    process_list: [""],
-    benefits: [""],
-    requirements: [""],
-    documents: [""],
-    what_you_get: [""],
-    fees_cost: "",
+    title: initialData?.title || "",
+    slug: initialData?.slug || "",
+    status: initialData?.status ?? 1,
+    hero_title: initialData?.hero_title || "",
+    hero_price: initialData?.hero_price || "",
+    hero_subtitle: initialData?.hero_subtitle || "",
+    form_title: initialData?.form_title || "",
+    also_get: initialData?.also_get?.length ? initialData.also_get : [""],
+    how_it_works: initialData?.how_it_works?.length ? initialData.how_it_works : [""],
+    process_list: initialData?.process_list?.length ? initialData.process_list : [""],
+    benefits: initialData?.benefits?.length ? initialData.benefits : [""],
+    requirements: initialData?.requirements?.length ? initialData.requirements : [""],
+    documents: initialData?.documents?.length ? initialData.documents : [""],
+    what_you_get: initialData?.what_you_get?.length ? initialData.what_you_get : [""],
+    fees_cost: initialData?.fees_cost || "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -58,11 +63,15 @@ const CustomPageForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post('/custom-pages', formData);
+      if (isEdit && initialData?.id) {
+        await api.post(`/custom-pages/${initialData.id}`, formData);
+      } else {
+        await api.post('/custom-pages', formData);
+      }
       router.push(all_routes.custompages || "/custom-pages");
     } catch (error: any) {
-      console.error("Error creating page:", error.response?.data || error.message);
-      alert("Error creating page: " + JSON.stringify(error.response?.data?.message || error.message));
+      console.error(`Error ${isEdit ? "updating" : "creating"} page:`, error.response?.data || error.message);
+      alert(`Error ${isEdit ? "updating" : "creating"} page: ` + JSON.stringify(error.response?.data?.message || error.message));
     } finally {
       setLoading(false);
     }
@@ -108,13 +117,13 @@ const CustomPageForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="card-header d-flex justify-content-between align-items-center mb-4">
-        <h4>Create New Template Content</h4>
+        <h4>{isEdit ? "Edit Template Content" : "Create New Template Content"}</h4>
         <div>
           <Link href={all_routes.custompages || "/custom-pages"} className="btn btn-secondary btn-sm me-2">
             Go Back
           </Link>
           <button type="submit" className="btn btn-primary btn-sm" disabled={loading}>
-            {loading ? "Publishing..." : "Save Configured Page"}
+            {loading ? (isEdit ? "Updating..." : "Publishing...") : (isEdit ? "Update Content" : "Save Configured Page")}
           </button>
         </div>
       </div>

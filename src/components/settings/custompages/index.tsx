@@ -84,10 +84,12 @@ const CustomPagesList = () => {
                     </td>
                     <td>
                       <div className="d-flex align-items-center">
-                        <Link href={`/${page.slug}`} target="_blank" className="btn btn-sm btn-icon btn-outline-info me-2" title="View">
+                        {/* <Link href={`/${page.slug}`} target="_blank" className="btn btn-sm btn-icon btn-outline-info me-2" title="View">
                           <i className="ti ti-eye"></i>
-                        </Link>
-                        {/* Edit link will go here when implemented */}
+                        </Link> */}
+                          <Link href={`${all_routes.custompages}/edit?id=${page.id}`} className="btn btn-sm btn-icon btn-outline-primary me-2" title="Edit">
+                            <i className="ti ti-edit"></i>
+                          </Link>
                         <button onClick={() => deletePage(page.id)} className="btn btn-sm btn-icon btn-outline-danger" title="Delete">
                           <i className="ti ti-trash"></i>
                         </button>
