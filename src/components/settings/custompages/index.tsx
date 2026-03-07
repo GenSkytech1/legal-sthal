@@ -78,8 +78,8 @@ const CustomPagesList = () => {
                     <td>{page.hero_title}</td>
                     <td>/{page.slug}</td>
                     <td>
-                      <span className={`badge bg-${page.status === 1 ? 'success' : 'danger'}`}>
-                        {page.status === 1 ? 'Active' : 'Inactive'}
+                      <span className={`badge bg-${Number(page.status) === 1 ? 'success' : 'danger'}`}>
+                        {Number(page.status) === 1 ? 'Active' : 'Inactive'}
                       </span>
                     </td>
                     <td>
