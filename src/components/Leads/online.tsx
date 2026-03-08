@@ -34,7 +34,9 @@ export default function IncomeListComponent () {
              DateTime: lead.created_at,
              Status: lead.status || 'New',
              AssignedTo: lead.assigned_to || 'Unassigned',
-             Remarks: lead.message || '-' // Mapping message to remarks for now
+             Remarks: lead.message || '-', // Mapping message to remarks for now
+             ServiceType: lead.service_type || '-',
+             City: lead.city || '-'
            }));
            setLeads(mappedData);
         }
@@ -47,6 +49,8 @@ export default function IncomeListComponent () {
     fetchLeads();
   }, []);
 
+  // Update dataSource for table whenever leads changes
+  // The table component might need the raw array passed as dataSource
   const dataSource = leads;
 
   const columns = [
@@ -99,6 +103,16 @@ export default function IncomeListComponent () {
       title: "Remarks",
       dataIndex: "Remarks",
       sorter: (a: any, b: any) => (a.Remarks || "").toString().localeCompare((b.Remarks || "").toString()),
+    },
+    {
+      title: "Service Type",
+      dataIndex: "ServiceType",
+      sorter: (a: any, b: any) => (a.ServiceType || "").toString().localeCompare((b.ServiceType || "").toString()),
+    },
+    {
+      title: "City",
+      dataIndex: "City",
+      sorter: (a: any, b: any) => (a.City || "").toString().localeCompare((b.City || "").toString()),
     },
 
 
@@ -228,7 +242,8 @@ export default function IncomeListComponent () {
             </div>
             <div className="card-body pb-0">
               <div className=" table-responsive">
-                <Table columns={columns} dataSource={dataSource} />
+                {/* Table component receives dataSource which is mapped from state leads */}
+                <Table columns={columns} dataSource={leads} />
               </div>
             </div>
           </div>
