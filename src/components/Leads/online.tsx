@@ -87,6 +87,15 @@ export default function IncomeListComponent () {
     {
       title: "Date & Time",
       dataIndex: "DateTime",
+      render: (text: string) => {
+        if (!text) return "-";
+        const d = new Date(text);
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        return `${day}-${month}-${year} ${time}`;
+      },
       sorter: (a: any, b: any) => new Date(a.DateTime || 0).getTime() - new Date(b.DateTime || 0).getTime(),
     },
     {
